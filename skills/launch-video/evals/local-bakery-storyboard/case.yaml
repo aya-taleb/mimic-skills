@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: local-bakery-storyboard
+expected_outcome: |
+  HyperFrames is not installed. The assistant writes a 30 second script and plan using only the given facts ($45, 8 people, Saturdays 9am), checks it, and writes media/launch/storyboard.md and shotlist.csv that a phone shooter can follow. It does not invent reviews or claims, does not require paid tools, and says how to install HyperFrames later if they want.
+context:
+  scaffold_script: place-files.sh

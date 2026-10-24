@@ -1,0 +1,22 @@
+feature,area,priority,original,clone,notes,Slotbook,MeetMate,source
+Sign up with email or Google,onboarding,must,yes,no,,yes,yes,S01
+Connect Google or Outlook calendar,onboarding,must,yes,no,,yes,yes,S02
+Set weekly availability,availability,must,yes,no,,yes,yes,S03
+Create an event type,event types,must,yes,no,,yes,yes,S05
+Public booking page with open slots,booking page,must,yes,no,,yes,yes,S07
+Guest books without an account,booking page,must,yes,no,,yes,yes,S09
+Show slots in the guest's time zone,booking page,must,yes,no,,yes,unknown,S08
+Confirmation email to both sides,notifications,must,yes,no,,yes,yes,#1
+Guest reschedules or cancels from a link,booking page,must,yes,no,,yes,yes,S11
+Buffer time,availability,should,yes,no,,yes,unknown,S05
+Custom questions on the form,booking page,should,yes,no,,yes,yes,S05
+Email reminders,notifications,should,yes,no,,yes,yes,#1
+Take payment at booking,payments,should,yes,no,,yes,unknown,#1
+Team round-robin,team,should,yes,no,,yes,yes,S12
+Embed on a website,sharing,could,yes,no,,yes,unknown,#1
+Mobile apps,platforms,could,yes,no,,partial,yes,#4
+App marketplace,integrations,could,yes,skip,their partner network,yes,no,#1
+Flat team price instead of per seat,billing,must,no,no,fix 1,no,no,fixes.md
+SMS reminders on every paid plan,notifications,must,no,no,fix 2,no,no,fixes.md
+Guest confirms time zone before booking,booking page,should,no,no,fix 3,no,no,fixes.md
+One click cancel and renewal reminder,billing,must,no,no,fix 4,no,no,fixes.md

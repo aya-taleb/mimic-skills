@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: local-go-live
+expected_outcome: |
+  Uses the local go-live checklist: site live, payments live with a test order refunded, GBP, permits (not legal advice), soft opening; preflight blocked on missing tests and brand.
+context:
+  scaffold_script: place-files.sh

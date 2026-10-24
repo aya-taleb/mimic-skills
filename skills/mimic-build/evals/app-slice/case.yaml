@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: app-slice
+expected_outcome: |
+  Builds slice 2 (host setup) per the architecture, with states, fresh copy, updates features.csv and build-log honestly.
+context:
+  scaffold_script: place-files.sh

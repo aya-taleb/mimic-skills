@@ -1,0 +1,14 @@
+feature,area,priority,original,clone,notes,Lunchbox Club,Curbside Eats,source
+Weekly lunch plan with 3 4 or 5 meals,plan,must,yes,no,,yes,no,#1
+Pick meals for the week online,ordering,must,yes,no,,yes,no,#1
+Delivery to the office at lunch,delivery,must,yes,no,,yes,partial,#1
+Weekly card billing,billing,must,yes,no,,yes,no,#1
+Skip a week,plan,should,yes,no,,yes,no,#1
+Vegetarian options daily,menu,should,yes,no,,yes,partial,#1
+Team booking for offices,offices,should,yes,no,,no,yes,#3
+Pay by invoice,billing,could,yes,no,,no,yes,#3
+Exclusive truck partner network,partners,could,yes,skip,their partners,no,yes,#3
+Change order until 9am the same day,ordering,must,no,no,fix 1,no,no,fixes.md
+Rotating food trucks each week,menu,must,no,no,fix 2,no,no,fixes.md
+Small team orders from 5 people,offices,should,no,no,fix 3,no,no,fixes.md
+Cancel online any time,billing,must,no,no,fix 4,no,no,fixes.md

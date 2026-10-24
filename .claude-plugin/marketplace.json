@@ -1,0 +1,14 @@
+{
+  "name": "mimic-skills",
+  "owner": {
+    "name": "Aya Taleb",
+    "url": "https://github.com/aya-taleb"
+  },
+  "plugins": [
+    {
+      "name": "mimic-skills",
+      "source": "./",
+      "description": "Build a better version of a competitor: map what they do, read what their customers hate, then plan, build, test, launch and ship your own, clean room."
+    }
+  ]
+}

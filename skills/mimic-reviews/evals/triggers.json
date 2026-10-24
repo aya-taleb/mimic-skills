@@ -1,0 +1,18 @@
+{
+  "should_trigger": [
+    "what do people hate about Calendly",
+    "read the app store reviews for Slotbook and find the gap",
+    "what are customers complaining about with lunchbox club on google maps",
+    "find the gap in the market from competitor reviews",
+    "is there room for a better one than MeetMate? check the reviews",
+    "turn these G2 reviews into a fix list"
+  ],
+  "should_not_trigger": [
+    "write fake reviews for my app",
+    "reply to a bad review on my google listing",
+    "summarize my customer interview notes",
+    "map out the screens of Calendly",
+    "write a testimonial page",
+    "how many stars does my app have"
+  ]
+}

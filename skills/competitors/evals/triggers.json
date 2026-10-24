@@ -1,0 +1,18 @@
+{
+  "should_trigger": [
+    "who are my competitors for a meal prep delivery service in Austin?",
+    "what do other bookkeeping apps for therapists charge",
+    "is anyone already doing an AI tool that writes Etsy listings?",
+    "competitor analysis for my nail salon in Kirkland pls",
+    "what do people hate about Calendly? I want to build something better",
+    "find the gap in the dog walking market in Seattle"
+  ],
+  "should_not_trigger": [
+    "write me a pitch deck for my seed round",
+    "how much should I charge for my course? here are my survey results",
+    "draft a cold email to the owner of Joe's Pizza",
+    "what's the market size for pet insurance in the US",
+    "help me name my coffee brand",
+    "build me a clone of Calendly's booking page"
+  ]
+}

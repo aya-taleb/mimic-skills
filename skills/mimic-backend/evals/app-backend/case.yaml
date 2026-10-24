@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: app-backend
+expected_outcome: |
+  Wires auth, payments, email, SMS through official SDKs; env names only; signed idempotent webhooks; cancel and renewal fixes; checklist with honest results.
+context:
+  scaffold_script: place-files.sh

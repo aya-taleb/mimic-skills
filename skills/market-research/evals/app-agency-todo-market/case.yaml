@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: app-agency-todo-market
+expected_outcome: |
+  Reads founder/context.md and research-notes.md, defines the market narrowly (small agencies in the US), runs a bottom-up sizing where every input is from the notes (with its link) or clearly marked as an assumption, uses the top-down figure only as a check, lists trends only from the notes with their links, gives a go / narrow / no-go call tied to the 50 paying teams goal, and writes founder/market.md. Invents no numbers.
+context:
+  scaffold_script: place-files.sh

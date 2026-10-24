@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: app-tests
+expected_outcome: |
+  Plan per flow with edge cases, Playwright specs, a test per fix, bug log in the right format, honest not-run results, gate status.
+context:
+  scaffold_script: place-files.sh

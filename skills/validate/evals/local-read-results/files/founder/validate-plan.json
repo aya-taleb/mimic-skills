@@ -1,0 +1,27 @@
+{
+  "assumption": "Offices in South Lake Union will pre-pay for a month of twice-weekly lunch",
+  "tests": [
+    {
+      "name": "pre-order page",
+      "type": "pre-order",
+      "metric": "offices pre-paid",
+      "denominator": "unique visitors",
+      "pass_at": 0.05,
+      "fail_below": 0.02,
+      "min_sample": 200,
+      "ends": "2026-10-22",
+      "locked_on": "2026-10-01",
+      "fingerprint": "ce99a67a9fc0"
+    },
+    {
+      "name": "concierge week",
+      "type": "concierge",
+      "metric": "offices that paid for week two",
+      "pass_at": 3,
+      "fail_below": 2,
+      "ends": "2026-10-22",
+      "locked_on": "2026-10-01",
+      "fingerprint": "9c636ea6a7fd"
+    }
+  ]
+}

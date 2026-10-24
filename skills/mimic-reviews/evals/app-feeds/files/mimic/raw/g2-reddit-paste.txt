@@ -1,0 +1,32 @@
+https://www.g2.example/products/slotbook/reviews/slotbook-review-1001
+date: 2026-09-12
+rating: 2
+We are a five person physio clinic. Slotbook is fine for one person but per seat billing means we pay for receptionists who only book for others.
+
+https://www.g2.example/products/slotbook/reviews/slotbook-review-1002
+date: 2026-08-30
+rating: 3
+Booking page is good. Cancelling the subscription required emailing support, which felt designed to keep us paying.
+
+https://www.g2.example/products/meetmate/reviews/meetmate-review-2001
+date: 2026-09-05
+rating: 2
+MeetMate has no free plan and charges per user. For a small studio it is too expensive.
+
+https://www.g2.example/products/meetmate/reviews/meetmate-review-2002
+date: 2026-08-18
+rating: 3
+SMS reminders are good but only on Business. The routing form is confusing to set up.
+
+https://www.g2.example/products/meetmate/reviews/meetmate-review-2003
+date: 2026-07-22
+rating: 1
+Double booking happened when Microsoft 365 sync lagged. Lost a client over it.
+
+https://www.reddit.example/r/smallbusiness/comments/abc123/comment/k1
+date: 2026-09-19
+Switched from Slotbook because we hit 4 seats and the price doubled. Looking for something flat priced for small teams.
+
+https://www.reddit.example/r/smallbusiness/comments/abc123/comment/k2
+date: 2026-09-19
+Same. Is there any booking tool with one flat price for a small team? Per seat is killing us.

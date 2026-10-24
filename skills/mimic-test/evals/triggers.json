@@ -1,0 +1,18 @@
+{
+  "should_trigger": [
+    "write e2e tests for my clone",
+    "test plan from the flows",
+    "log this bug: booking twice works",
+    "is tidyslot ready? run the tests",
+    "we did a dry run, log what broke",
+    "QA my app before launch"
+  ],
+  "should_not_trigger": [
+    "write unit tests for this python function",
+    "fix this failing jest test in another project",
+    "deploy my app",
+    "what is playwright",
+    "plan my architecture",
+    "write the landing page"
+  ]
+}

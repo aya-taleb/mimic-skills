@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: app-preflight
+expected_outcome: |
+  Runs preflight.py, shows the table, explains blocked checks (sweep not run because replica-brand is not installed, legal failed because the privacy and terms pages are one-line stubs and the policy names none of Supabase, Stripe, Resend or Twilio, and any others), gives get_linked.py, does not deploy, asks for the yes.
+context:
+  scaffold_script: place-files.sh

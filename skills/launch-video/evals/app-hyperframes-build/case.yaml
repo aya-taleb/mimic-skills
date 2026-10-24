@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: app-hyperframes-build
+expected_outcome: |
+  The assistant reads the business file, writes a script of about 45 seconds that fits the pace, uses only facts from the file (212 teams) with sources, writes media/launch/script.md and plan.json, runs the plan check, generates the HyperFrames project, runs hyperframes lint, and renders or gives the render command. Scenes without assets are flagged, not faked. It leaves posting to the user and names the next step.
+context:
+  scaffold_script: place-files.sh

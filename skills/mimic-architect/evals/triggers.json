@@ -1,0 +1,18 @@
+{
+  "should_trigger": [
+    "what stack should I use for my calendly clone",
+    "design the database for tidyslot",
+    "plan the build for my competitor rebuild",
+    "architecture and build order for my app",
+    "what tools do I need to run a lunch subscription without code",
+    "schema and api for my version of meetmate"
+  ],
+  "should_not_trigger": [
+    "fix this postgres error",
+    "build the booking page",
+    "write tests for my app",
+    "what is a foreign key",
+    "set up stripe webhooks",
+    "write the landing page"
+  ]
+}

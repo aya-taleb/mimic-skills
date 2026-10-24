@@ -1,0 +1,136 @@
+{
+  "repo": "mimic-skills",
+  "skills": [
+    {
+      "name": "mimic-run",
+      "status": "ours",
+      "version": "0.1.0"
+    },
+    {
+      "name": "mimic-recon",
+      "status": "reworked",
+      "version": "0.1.0",
+      "source": {
+        "repo": "Jakeschincariol/replica-skill",
+        "commit": "77c9436fb3d18c3d58169efb8caf4fe906b0dc51",
+        "path": "replica-recon",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "mimic-reviews",
+      "status": "reworked",
+      "version": "0.1.0",
+      "source": {
+        "repo": "Jakeschincariol/replica-skill",
+        "commit": "77c9436fb3d18c3d58169efb8caf4fe906b0dc51",
+        "path": "replica-entrepreneur",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "mimic-launch",
+      "status": "reworked",
+      "version": "0.1.0",
+      "source": {
+        "repo": "Jakeschincariol/replica-skill",
+        "commit": "77c9436fb3d18c3d58169efb8caf4fe906b0dc51",
+        "path": "replica-launch",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "mimic-architect",
+      "status": "rewritten",
+      "version": "0.1.0",
+      "replaces": {
+        "repo": "Jakeschincariol/replica-skill",
+        "path": "replica-architect"
+      }
+    },
+    {
+      "name": "mimic-build",
+      "status": "rewritten",
+      "version": "0.1.0",
+      "replaces": {
+        "repo": "Jakeschincariol/replica-skill",
+        "path": "replica-build"
+      }
+    },
+    {
+      "name": "mimic-backend",
+      "status": "rewritten",
+      "version": "0.1.0",
+      "replaces": {
+        "repo": "Jakeschincariol/replica-skill",
+        "path": "replica-backend"
+      }
+    },
+    {
+      "name": "mimic-test",
+      "status": "rewritten",
+      "version": "0.1.0",
+      "replaces": {
+        "repo": "Jakeschincariol/replica-skill",
+        "path": "replica-test"
+      }
+    },
+    {
+      "name": "mimic-deploy",
+      "status": "rewritten",
+      "version": "0.1.0",
+      "replaces": {
+        "repo": "Jakeschincariol/replica-skill",
+        "path": "replica-deploy"
+      }
+    },
+    {
+      "name": "replica-design",
+      "status": "linked",
+      "repo": "Jakeschincariol/replica-skill",
+      "commit": "77c9436fb3d18c3d58169efb8caf4fe906b0dc51",
+      "path": "replica-design",
+      "license": "MIT"
+    },
+    {
+      "name": "replica-diff",
+      "status": "linked",
+      "repo": "Jakeschincariol/replica-skill",
+      "commit": "77c9436fb3d18c3d58169efb8caf4fe906b0dc51",
+      "path": "replica-diff",
+      "license": "MIT"
+    },
+    {
+      "name": "replica-brand",
+      "status": "linked",
+      "repo": "Jakeschincariol/replica-skill",
+      "commit": "77c9436fb3d18c3d58169efb8caf4fe906b0dc51",
+      "path": "replica-brand",
+      "license": "MIT"
+    },
+    {
+      "name": "market-research",
+      "status": "synced",
+      "home": "entrepreneur-skills",
+      "version": "0.1.0"
+    },
+    {
+      "name": "validate",
+      "status": "synced",
+      "home": "entrepreneur-skills",
+      "version": "0.1.0"
+    },
+    {
+      "name": "competitors",
+      "status": "synced",
+      "home": "biz-launch-skills",
+      "version": "0.1.0"
+    },
+    {
+      "name": "launch-video",
+      "status": "synced",
+      "home": "multimedia-skills",
+      "version": "0.1.0"
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "should_trigger": [
+    "build the first slice of tidyslot",
+    "start building my clone from the recon",
+    "code the booking flow",
+    "build the order page for noon wheels",
+    "next slice please",
+    "make the screens with all their states"
+  ],
+  "should_not_trigger": [
+    "plan my database",
+    "write tests",
+    "copy this website's html exactly",
+    "deploy it",
+    "explain react hooks",
+    "write my pricing page"
+  ]
+}

@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: app-after-reviews
+expected_outcome: |
+  Runs the status check, shows research and reviews done and validate as the next step, and asks before running it.
+context:
+  scaffold_script: place-files.sh

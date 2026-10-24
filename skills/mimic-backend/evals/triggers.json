@@ -1,0 +1,18 @@
+{
+  "should_trigger": [
+    "add login to my clone",
+    "set up stripe for the team plan",
+    "send reminder emails and sms",
+    "connect google calendar with the official api",
+    "is my app secure? run the security check",
+    "payments and email for my lunch subscription"
+  ],
+  "should_not_trigger": [
+    "what is oauth",
+    "design my landing page",
+    "write e2e tests",
+    "fix my css",
+    "deploy to production",
+    "draft a newsletter"
+  ]
+}

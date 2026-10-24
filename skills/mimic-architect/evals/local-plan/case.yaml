@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: local-plan
+expected_outcome: |
+  Plans tools not code: ordering, payments, email, partner forms, records, setup order.
+context:
+  scaffold_script: place-files.sh

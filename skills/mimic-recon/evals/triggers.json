@@ -1,0 +1,18 @@
+{
+  "should_trigger": [
+    "reverse engineer cal.com for me",
+    "map out how Lunchbox Club and Curbside Eats work",
+    "what screens does Calendly have? I want to build my own",
+    "how does this competitor run their business, here's their google maps link",
+    "I want to copy Notion's pages and sharing but better",
+    "break down these 3 competitors from my competitors file"
+  ],
+  "should_not_trigger": [
+    "what's the market size for lunch delivery in denver",
+    "find me competitors for a booking app",
+    "write my landing page",
+    "read the reviews of Slotbook",
+    "plan the database for my app",
+    "design a logo for my app"
+  ]
+}

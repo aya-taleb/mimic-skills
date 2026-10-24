@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: local-launch
+expected_outcome: |
+  Notices brand.json is missing and asks or notes it; writes landing with the founding offer, area and hours; GBP description under 750 with no links or prices; uses only the real waitlist number.
+context:
+  scaffold_script: place-files.sh

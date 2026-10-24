@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: local-order-path
+expected_outcome: |
+  Builds the order path as tools and docs: order page copy, order form fields, change-by-9am rule, confirmation message, truck checklist; dry run as done check.
+context:
+  scaffold_script: place-files.sh

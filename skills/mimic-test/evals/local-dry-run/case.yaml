@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: local-dry-run
+expected_outcome: |
+  Turns notes into bug rows with fixed severities (late lunch / wrong diet = S1), runs bugs.py, says launch is blocked.
+context:
+  scaffold_script: place-files.sh

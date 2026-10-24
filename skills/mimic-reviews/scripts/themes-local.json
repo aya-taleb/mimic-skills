@@ -1,0 +1,234 @@
+{
+ "_about": "Themes for local businesses, services and physical products, used by reviews.py --themes themes-local.json. Same format as themes.json. Patterns are Python regular expressions matched case-insensitively. Add the category's own words (for food: cold, soggy, portion; for cleaning: missed spots, late).",
+ "request_patterns": [
+  "\\bi wish\\b",
+  "\\bplease add\\b",
+  "\\bwould be (nice|great|good|helpful)\\b",
+  "\\bwould love\\b",
+  "\\bneeds? (a|an|the|to|more)\\b",
+  "\\bno way to\\b",
+  "\\bthere'?s no (way|option)\\b",
+  "\\b(can'?t|cannot|unable to) (even )?(add|change|edit|set|choose|export|import|customi[sz]e|connect|undo|delete|turn off)\\b",
+  "\\b(missing|lacks|lacking)\\b",
+  "\\bdoesn'?t (have|support|let|allow)\\b",
+  "\\bif only\\b",
+  "\\bfeature request\\b",
+  "\\bwhy (can'?t|isn'?t|doesn'?t)\\b",
+  "\\bwish (there was|there were|it had|it was|the|they|we could|i could)\\b",
+  "\\bis there (any|a|an) \\w+"
+ ],
+ "themes": [
+  {
+   "id": "price",
+   "label": "Price and value",
+   "kind": "complaint",
+   "patterns": [
+    "\\bexpensive\\b",
+    "\\boverpriced\\b",
+    "\\bpric(e|es|ey|ing)\\b",
+    "\\bnot worth\\b",
+    "\\bportions? (are |were )?(small|tiny)\\b",
+    "\\brip.?off\\b",
+    "\\bfees?\\b",
+    "\\btip(s|ping)?\\b"
+   ]
+  },
+  {
+   "id": "quality",
+   "label": "Quality of the product or food",
+   "kind": "complaint",
+   "patterns": [
+    "\\bcold\\b",
+    "\\bsoggy\\b",
+    "\\bstale\\b",
+    "\\bbland\\b",
+    "\\braw\\b",
+    "\\bundercooked\\b",
+    "\\bburnt\\b",
+    "\\bquality\\b",
+    "\\bfell apart\\b",
+    "\\bcheap(ly)? made\\b",
+    "\\bbroke\\b",
+    "\\bdefective\\b",
+    "\\barrived cold\\b",
+    "\\blukewarm\\b",
+    "\\bsits in a bag\\b"
+   ]
+  },
+  {
+   "id": "wait",
+   "label": "Waits, delays and lateness",
+   "kind": "complaint",
+   "patterns": [
+    "\\bwait(ed|ing)?\\b",
+    "\\blate\\b",
+    "\\bdelay",
+    "\\btook (forever|an hour|\\d+ (min|minutes|hours))\\b",
+    "\\bslow\\b",
+    "\\bline\\b",
+    "\\bnever (came|arrived|showed)\\b",
+    "\\bno.?show\\b"
+   ]
+  },
+  {
+   "id": "orders",
+   "label": "Wrong or missing orders",
+   "kind": "complaint",
+   "patterns": [
+    "\\bwrong (order|item|size)\\b",
+    "\\bmissing\\b",
+    "\\bforgot\\b",
+    "\\bmix(ed)?.?up\\b",
+    "\\bnot what i ordered\\b",
+    "\\bincomplete\\b"
+   ]
+  },
+  {
+   "id": "staff",
+   "label": "Staff and service",
+   "kind": "complaint",
+   "patterns": [
+    "\\brude\\b",
+    "\\bstaff\\b",
+    "\\bunfriendly\\b",
+    "\\bignored\\b",
+    "\\battitude\\b",
+    "\\bunprofessional\\b",
+    "\\bmanager\\b",
+    "\\bowner\\b"
+   ]
+  },
+  {
+   "id": "booking",
+   "label": "Booking, ordering and scheduling",
+   "kind": "complaint",
+   "patterns": [
+    "\\bbook(ing)?\\b",
+    "\\breserv",
+    "\\bappointment\\b",
+    "\\bschedul",
+    "\\bcancel(l?ed|lation)\\b",
+    "\\breschedul",
+    "\\border(ing)? (online|ahead|system)\\b",
+    "\\bwebsite\\b",
+    "\\bapp\\b",
+    "\\b(orders?|menu) locks?\\b",
+    "\\block(s|ed)? (on|at|sunday|monday)\\b",
+    "\\bno flexibility\\b",
+    "\\bcutoff\\b",
+    "\\bchange (my|your|the) order\\b",
+    "\\bbook(ing)? request\\b"
+   ]
+  },
+  {
+   "id": "billing",
+   "label": "Billing, refunds and subscriptions",
+   "kind": "complaint",
+   "patterns": [
+    "\\bcharged\\b",
+    "\\brefund",
+    "\\bsubscription\\b",
+    "\\bauto.?renew",
+    "\\bhidden (fee|charge)",
+    "\\bbilling\\b",
+    "\\bscam\\b",
+    "\\bdeposit\\b",
+    "\\bcancel(l?ing|l?ed|lation|s)?\\b",
+    "\\bbilled\\b",
+    "\\bminimum\\b"
+   ]
+  },
+  {
+   "id": "hygiene",
+   "label": "Cleanliness and safety",
+   "kind": "complaint",
+   "patterns": [
+    "\\bdirty\\b",
+    "\\bfilthy\\b",
+    "\\bhair in\\b",
+    "\\bfood poisoning\\b",
+    "\\bsick\\b",
+    "\\bunsanitary\\b",
+    "\\bbugs?\\b",
+    "\\bunsafe\\b"
+   ]
+  },
+  {
+   "id": "communication",
+   "label": "No answer, no updates",
+   "kind": "complaint",
+   "patterns": [
+    "\\bno (response|reply|answer|update)\\b",
+    "\\bnever (replied|responded|called back|heard back)\\b",
+    "\\bcall(ed)? (back|several times)\\b",
+    "\\bemail(ed)? (them|twice)\\b",
+    "\\bghost(ed)?\\b"
+   ]
+  },
+  {
+   "id": "consistency",
+   "label": "Inconsistent from visit to visit",
+   "kind": "complaint",
+   "patterns": [
+    "\\bused to be\\b",
+    "\\binconsistent\\b",
+    "\\bhit or miss\\b",
+    "\\bgone downhill\\b",
+    "\\bnot (like|as good as) (before|it used)\\b",
+    "\\bnew (owner|management)\\b"
+   ]
+  },
+  {
+   "id": "access",
+   "label": "Location, parking, hours",
+   "kind": "request",
+   "patterns": [
+    "\\bparking\\b",
+    "\\bhours\\b",
+    "\\bopen (later|earlier|on weekends)\\b",
+    "\\bclosed (on|at)\\b",
+    "\\bhard to find\\b",
+    "\\bdeliver(y)? (to|area|radius)\\b",
+    "\\bwheelchair\\b",
+    "\\baccessib"
+   ]
+  },
+  {
+   "id": "options",
+   "label": "Options, variety and diets",
+   "kind": "request",
+   "patterns": [
+    "\\bvegan\\b",
+    "\\bvegetarian\\b",
+    "\\bgluten\\b",
+    "\\bhalal\\b",
+    "\\bkosher\\b",
+    "\\ballerg",
+    "\\boptions?\\b",
+    "\\bvariety\\b",
+    "\\bsame (thing|menu|food) every\\b",
+    "\\bmenu\\b",
+    "\\brotation\\b",
+    "\\bbored\\b",
+    "\\bsame (six|five|\\d+) (dishes|meals|items)\\b"
+   ]
+  },
+  {
+   "id": "groups",
+   "label": "Groups, offices and catering",
+   "kind": "request",
+   "patterns": [
+    "\\bgroup (order|booking)s?\\b",
+    "\\boffice\\b",
+    "\\bteam (lunch|order)\\b",
+    "\\bcater",
+    "\\bbulk\\b",
+    "\\bcorporate\\b",
+    "\\binvoice\\b",
+    "\\bsmall (group|team)\\b",
+    "\\b\\d+ person team\\b",
+    "\\bminimum\\b"
+   ]
+  }
+ ]
+}

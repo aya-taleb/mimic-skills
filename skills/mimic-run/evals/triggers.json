@@ -1,0 +1,18 @@
+{
+  "should_trigger": [
+    "where am i in the mimic flow",
+    "what's next for my clone project?",
+    "pick up where we left off on the competitor rebuild",
+    "I want to build a better version of Calendly, where do I start",
+    "run the whole mimic chain for me",
+    "continue the noon wheels build, whatever step is next"
+  ],
+  "should_not_trigger": [
+    "what's the weather in denver",
+    "write a linkedin post about my launch",
+    "fix this typescript error in my booking page",
+    "summarize this PDF",
+    "draft a cold email to an office manager",
+    "how do I install python on mac"
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "should_trigger": [
+    "write the landing page for my clone",
+    "how much should I charge for tidyslot vs competitors",
+    "write my app store listing and check it",
+    "google business profile description for noon wheels",
+    "launch plan for my rebuilt booking app",
+    "product hunt launch copy for my better version"
+  ],
+  "should_not_trigger": [
+    "post this to product hunt for me",
+    "write a linkedin post",
+    "make a launch video",
+    "deploy my app to vercel",
+    "design my logo",
+    "send cold emails to 50 offices"
+  ]
+}

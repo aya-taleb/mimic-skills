@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: app-launch
+expected_outcome: |
+  Writes mimic/launch/ (landing, pricing, listing.json, plan, handoff), runs listing.py with no errors, no fake proof, competitors' names out, handoffs to biz-boost and social plans.
+context:
+  scaffold_script: place-files.sh

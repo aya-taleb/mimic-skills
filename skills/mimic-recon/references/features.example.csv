@@ -1,0 +1,10 @@
+feature,area,priority,original,clone,notes,Competitor A,Competitor B,source
+Sign up with email or Google,onboarding,must,yes,no,,yes,yes,https://example.com/help/sign-up
+Set weekly availability,availability,must,yes,no,,yes,yes,S03
+Public booking page with open slots,booking page,must,yes,no,,yes,yes,S07
+Book as a guest without an account,booking page,must,yes,no,,yes,partial,S07
+Guest can reschedule or cancel from a link,booking page,must,yes,no,,yes,yes,F03
+Text reminders before the meeting,notifications,should,yes,no,,partial,no,https://example.com/pricing
+Take payment at booking,payments,should,yes,no,,yes,unknown,https://example.com/help/payments
+Team round-robin,team,could,yes,no,,yes,no,https://example.com/help/round-robin
+Marketplace of third-party apps,integrations,could,yes,skip,their partner network is not something you can rebuild,yes,no,https://example.com/apps

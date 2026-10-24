@@ -1,0 +1,18 @@
+{
+  "should_trigger": [
+    "make a 45 second launch video for my app from our landing page",
+    "I need a promo video for our new feature, can you script and build it?",
+    "turn tallyapp.io into a short product video for instagram",
+    "storyboard a 30 second ad for my bakery's new class",
+    "we launch on product hunt friday, make me a launch video",
+    "explainer video for my saas, under a minute"
+  ],
+  "should_not_trigger": [
+    "make a 5 second AI clip of a sunset",
+    "add text cards over my talking head video",
+    "write a launch tweet for our new feature",
+    "plan our product hunt launch day checklist",
+    "transcribe my demo recording",
+    "write a youtube script for a 10 minute tutorial"
+  ]
+}

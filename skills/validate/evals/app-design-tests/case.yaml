@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: app-design-tests
+expected_outcome: |
+  Reads the business file, market.md and evidence.md; names one riskiest assumption (that agency owners will pay, not just like it) with reasons drawn from the files; designs 1 to 3 cheap tests (e.g. pre-order or paid pilot, waitlist with price shown); sets pass and fail lines, a minimum sample and an end date for each, working back from the 50 paying teams goal where it can; writes founder/validate-plan.json and locks it with the tool; drafts honest landing page copy in founder/validate.md with no invented proof; names what the founder does next.
+context:
+  scaffold_script: place-files.sh

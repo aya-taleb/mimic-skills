@@ -1,0 +1,4 @@
+schema_version: "1.1"
+name: local-lunch-subscription
+expected_outcome: |
+  A local-mode competitor map: restaurants and delivery near downtown Bellevue, lunch subscription and catering services, and substitutes (office cafeteria, bringing lunch from home, food trucks). Prices with links and dates, distance or area noted, complaint patterns from public reviews with links, the gap and the case against it.

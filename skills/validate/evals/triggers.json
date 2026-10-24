@@ -1,0 +1,18 @@
+{
+  "should_trigger": [
+    "how do I validate my app idea before building it?",
+    "set up a fake door test for the premium tier",
+    "will people actually pay for this? how can I test it cheaply",
+    "my waitlist test got 40 signups from 900 visitors, is that good enough to build?",
+    "make me a coming-soon waitlist page for my candle subscription so I can see if anyone signs up",
+    "what's the riskiest assumption in my business and how do I test it"
+  ],
+  "should_not_trigger": [
+    "validate this JSON against my schema",
+    "write unit tests for my signup form",
+    "how big is the candle market in the US?",
+    "write my launch day announcement post",
+    "who are the main competitors for my AI tutor",
+    "help me A/B test two email subject lines for my newsletter"
+  ]
+}

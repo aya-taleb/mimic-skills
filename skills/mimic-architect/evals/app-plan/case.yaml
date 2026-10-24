@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: app-plan
+expected_outcome: |
+  Writes mimic/architecture.md with a stack tied to the founder's skills and budget, a schema with the double booking constraint, routes, services, slices, costs without guesses.
+context:
+  scaffold_script: place-files.sh

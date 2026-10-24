@@ -1,0 +1,4 @@
+schema_version: "1.1"
+name: online-invoicing-app
+expected_outcome: |
+  A founder/competitors.md with a dated scope line, direct rivals (invoicing apps), indirect ones (cleaning business software, payment apps) and substitutes (Venmo, cash, paper), each price with a link and what it includes, complaint patterns with counts and links but no reviewer names, a gap argued from those rows plus the case against it, and next-step lines for pricing and offer.

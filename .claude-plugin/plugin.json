@@ -1,0 +1,22 @@
+{
+  "name": "mimic-skills",
+  "description": "Build a better version of a competitor: map what they do, read what their customers hate, then plan, build, test, launch and ship your own, clean room.",
+  "version": "0.1.0",
+  "author": {
+    "name": "Aya Taleb",
+    "url": "https://github.com/aya-taleb"
+  },
+  "homepage": "https://github.com/aya-taleb/mimic-skills",
+  "repository": "https://github.com/aya-taleb/mimic-skills",
+  "license": "MIT",
+  "keywords": [
+    "claude-skills",
+    "founder",
+    "competitor-research",
+    "reviews",
+    "clean-room",
+    "app-builder",
+    "launch"
+  ],
+  "skills": "./skills/"
+}

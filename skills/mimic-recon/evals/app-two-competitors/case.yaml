@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: app-two-competitors
+expected_outcome: |
+  Writes mimic/recon.md and mimic/features.csv covering both competitors from the saved pages, with sources, screens, flows, a data model, competitor columns and skip rows.
+context:
+  scaffold_script: place-files.sh

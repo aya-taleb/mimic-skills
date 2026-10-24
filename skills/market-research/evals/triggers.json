@@ -1,0 +1,18 @@
+{
+  "should_trigger": [
+    "how big is the market for a mobile car wash in Austin?",
+    "is there actually a market for my AI resume app or am I kidding myself",
+    "work out TAM SAM SOM for my B2B invoicing tool, with sources",
+    "is the meal kit market growing or shrinking? should I still go into it",
+    "who actually buys office catering and how many of them are there in Seattle",
+    "quick TAM slide for my investor call this afternoon, AI fitness coach app"
+  ],
+  "should_not_trigger": [
+    "who are my top 5 competitors and what do they charge",
+    "write me a pitch deck for my seed round",
+    "what's the stock market doing today",
+    "help me set a price for my app using a survey",
+    "plan my launch week",
+    "write interview questions to ask potential customers"
+  ]
+}

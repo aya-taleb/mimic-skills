@@ -1,0 +1,9 @@
+rank,theme,kind,label,reviews,share_pct,avg_rating,sources,competitors,thin,quote,quote_url,quote_ref
+1,booking,complaint,"Booking, ordering and scheduling",4,28.6,2.0,google-maps;reddit,Curbside Eats;Lunchbox Club,no,Orders lock Sunday at 8pm.,https://maps.google.example/lunchboxclub/review/r2,
+2,billing,complaint,"Billing, refunds and subscriptions",3,21.4,1.67,google-maps,Curbside Eats;Lunchbox Club,yes,"Wrong order, then charged for the week anyway.",https://maps.google.example/lunchboxclub/review/r5,
+3,wait,complaint,"Waits, delays and lateness",3,21.4,2.67,google-maps,Curbside Eats;Lunchbox Club,yes,Line at the truck took 25 minutes for 30 people.,https://maps.google.example/curbsideeats/review/c3,
+4,orders,complaint,Wrong or missing orders,2,14.3,1.0,google-maps,Lunchbox Club,yes,"Wrong order, then charged for the week anyway.",https://maps.google.example/lunchboxclub/review/r5,
+5,options,request,"Options, variety and diets",2,14.3,3.0,google-maps,Lunchbox Club,yes,Same six dishes on rotation.,https://maps.google.example/lunchboxclub/review/r3,
+6,quality,complaint,Quality of the product or food,2,14.3,3.0,google-maps,Curbside Eats;Lunchbox Club,yes,Food arrived cold again.,https://maps.google.example/lunchboxclub/review/r1,
+7,groups,request,"Groups, offices and catering",1,7.1,2.0,google-maps,Curbside Eats,yes,Wish we could book for a small group.,https://maps.google.example/curbsideeats/review/c1,
+8,price,complaint,Price and value,1,7.1,2.0,yelp,Lunchbox Club,yes,"Fine food but way overpriced for what you get, plus the $2.99 delivery fee because our building has only 3 members.",https://www.yelp.example/biz/lunchbox-club-denver?hrid=y1,

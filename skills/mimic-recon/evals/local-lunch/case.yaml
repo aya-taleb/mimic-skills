@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: local-lunch
+expected_outcome: |
+  Uses the non-app path: offer, customer steps (C01...), operations, records, side by side, features.csv in the same format.
+context:
+  scaffold_script: place-files.sh

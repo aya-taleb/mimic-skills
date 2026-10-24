@@ -1,0 +1,18 @@
+{
+  "should_trigger": [
+    "ship it to my domain",
+    "deploy tidyslot",
+    "is it ready to go live? run preflight",
+    "set up dns for my app",
+    "go live checklist for noon wheels",
+    "production setup and monitoring for my clone"
+  ],
+  "should_not_trigger": [
+    "write my launch tweet",
+    "fix this bug",
+    "what is DNS",
+    "buy a domain name",
+    "write a test plan",
+    "design the database"
+  ]
+}

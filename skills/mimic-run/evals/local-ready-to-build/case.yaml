@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: local-ready-to-build
+expected_outcome: |
+  Sees a local business, marks design as skipped, names mimic-build as next, and starts it (the user said keep going).
+context:
+  scaffold_script: place-files.sh
