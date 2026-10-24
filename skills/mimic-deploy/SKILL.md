@@ -157,6 +157,23 @@ em dashes, no hype. Skip these words in everything you write:
 delve, leverage, seamless, streamline, comprehensive, journey, unlock, elevate, empower, foster, robust, crucial, utilize, simple. <!-- allow-words -->
 If the humanize skill is installed, run copy that a person will publish or send through it.
 
+Write the reply for a founder who may not code. The table and files can stay technical; the
+reply leads with plain words.
+- Start each fix with what to do in everyday words, then the skill or command in brackets:
+  "Make sure your passwords file is never uploaded (`/mimic-backend`)", not "`.env` not
+  ignored, run `/mimic-backend`".
+- Explain each technical term once, the first time, in a few words: S1 or S2 bug (one that
+  stops people ordering or paying), secrets (keys and passwords for your services), `.env`
+  (the file that holds them), DNS (the settings at your domain company that point your name
+  at the site), webhook (how the payment service tells your site a payment went through),
+  rollback (going back to the last working version), preflight (the check before going live).
+- For a local business or a no-code setup, open the reply with the go-live items still
+  open, each by name in one line: site live, payments live with one refunded test order,
+  Google Business Profile, permits and insurance, soft opening. The code checks come after,
+  one line each. The runbook holds the detail; the reply must still name every open item.
+- Keep slash commands and file paths out of the opening lines. One "next" line at the end
+  can name them.
+
 ## Output
 
 `mimic/deploy/preflight.md`, `mimic/deploy/runbook.md`, and either "blocked by ..." with

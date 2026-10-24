@@ -55,9 +55,25 @@ Three is the most. A founder running five tests at once runs none of them well.
 For each test: a **pass line** (at or above, it's a go signal), a **fail line** (below,
 it's a stop signal), a **minimum sample** and an **end date**. Between the two lines is
 "unclear". Work the pass line back from the founder's goal where you can, and show that
-math. If you can't, label the line as a starting assumption and say why.
+math.
 
-Write them to `founder/validate-plan.json` (format in the script's header) and lock them:
+No goal or break-even to work from? Don't pick a fixed number for them. Offer a range for
+their kind of business and have the founder pick inside it before the test starts:
+- local, food, subscription or product: 10 to 30 paid pre-orders in 14 days
+- service or agency: 2 to 5 paid pilots in 30 days
+- online product or app: 10 to 50 paid pre-orders or deposits from the page in 14 days
+- a rate test (signups per visitor): give the range as rates, with a minimum sample
+The right bar depends on price, reach and what they can serve, and they know those better.
+The low end is the least that rules out friends-only demand. Give a fail range under it too.
+
+Write them to `founder/validate-plan.json` (format in the script's header). With a range,
+fill `pass_range` and `fail_range`, leave `pass_at` and `fail_below` as null, and write
+the ranges in `validate.md` ("Pass: your pick from 10 to 30 paid pre-orders by Nov 20").
+Make picking one short reply: suggest one number inside each range with a one-line reason
+("I'd start at 15: the low end rules out friends, the top needs reach you haven't shown"),
+and say "reply with your two numbers, or 'use yours', and I'll lock them". If the founder
+is not there to answer, that reply is task 1 in the plan, before the page goes live. Once
+the founder has picked, set `pass_at` and `fail_below` and lock them:
 
 ```bash
 python3 <skill-dir>/scripts/testplan.py lock founder/validate-plan.json

@@ -223,6 +223,12 @@ def status(project, home=None, extra_dirs=()):
     linked = {n: find_skill(n, project, home, extra_dirs) for n in LINKED}
     synced = {n: find_skill(n, project, home, extra_dirs) for n in SYNCED}
     verdict = validate_verdict(project)
+    for s in steps:
+        # validate.md alone is a plan. The step is done only once a result is recorded.
+        if s["id"] == "validate" and s["state"] == "done" and verdict is None:
+            s["state"] = "partial"
+            s["missing"] = ["a result line in founder/validate.md (Result: go, stop, pivot...)"]
+            s["waiting_for_result"] = True
     matrix = matrix_summary(project)
     blockers = open_blockers(project)
     warnings = []
@@ -284,6 +290,9 @@ def pick_next(steps, verdict, blockers, matrix):
             continue  # optional steps are offered, never pushed (see optional_before)
         if s["id"] == "validate" and by_id["reviews"]["state"] != "done":
             continue
+        if s.get("waiting_for_result"):
+            return (s["skill"], "run the demand test, then come back with the numbers so "
+                    "validate can record the result", gate)
         if s["id"] == "deploy" and blockers:
             return "mimic-test", "fix the open S1 and S2 bugs, then rerun the tests", gate
         return s["skill"], s["why"], gate

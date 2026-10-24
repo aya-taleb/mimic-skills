@@ -82,7 +82,11 @@ the routes in this order. The details, links and limits are in `references/sourc
 1. **Official feeds and APIs.** The App Store's public reviews feed (up to 10 pages of 50
    per country) and the Hacker News search API. Save the response to a file under
    `mimic/raw/`, then run `collect.py` on it. If a fetch tool is available, fetch the URL
-   and save it. If not, give the user the exact URL to open and save.
+   and save it. If not, give the user the exact URL to open and save. When you save a feed
+   or page yourself, strip reviewer names and profile links from it right away:
+   `python3 scripts/collect.py scrub <saved files>` (or `--scrub` on `apple-rss`). Files the
+   user gave you are theirs: don't change them. If they hold names, say so and offer to
+   scrub them.
 2. **Exports the user has.** A CSV from a review platform account, a Google Play Console
    export for the user's own app, a sheet from a survey. `collect.py csv` with `--map` for
    column names.
@@ -104,8 +108,11 @@ APIs return only a few reviews per place, so most rows come from reading the pag
 python3 scripts/reviews.py mimic/reviews.csv --out mimic/feedback.md --pain-out mimic/pain-points.csv
 ```
 
-It sorts reviews into themes, weights low ratings and recent reviews higher, marks themes
-with fewer than 3 reviews or one source as thin, shows which competitor each theme hits,
+It sorts reviews into themes, weights low ratings and recent reviews higher, and counts
+only complaints toward complaint themes: 3 stars or less, unrated, or 4 stars with a "but".
+Praise that matches a theme is listed apart, never counted. It marks themes with fewer
+than 3 reviews as thin and themes from a single source as one source (two separate flags),
+shows which competitor each theme hits,
 lists requests in customers' own words, and surfaces low ratings that matched no theme.
 Read that last list by hand. It is often the best part.
 
@@ -114,14 +121,17 @@ double booking, time zone; for lunch delivery: cold, late, same menu). Copy it t
 `mimic/themes.json`, edit the copy, and rerun with `--themes mimic/themes.json`.
 
 If a theme catches reviews that do not belong, or misses ones that do, fix the patterns
-and rerun. Do not hand-edit `feedback.md` or `pain-points.csv`. Other skills read those
+and rerun. Then read the quotes under each of the top themes. Two themes that catch mostly
+the same reviews (price and per-seat price) double-count: merge them into one. Keep new
+patterns narrow, a whole phrase customers use, not one common word like "team". Do not hand-edit `feedback.md` or `pain-points.csv`. Other skills read those
 files, so their counts must come from the tool, and `fixes.md` must use the same counts.
 
 Tag every row with its competitor (`--competitor` on `collect.py`, or the `competitor`
 column). A row with no competitor cannot be counted per competitor.
 
 No Python? Do the same by hand: group rows by complaint, count them, note the sources,
-and mark anything under 3 reviews or from one source as thin.
+leave out 5 star praise, mark anything under 3 reviews as thin and anything from a single
+source as one source.
 
 ## Step 3: three lists
 
@@ -133,7 +143,9 @@ one line, how many reviews, how many sources, which competitors, one or two link
 3. **What is unsolved.** Whole jobs or groups nobody serves ("not built for teams",
    "nothing for offices downtown"). These become positioning.
 
-Thin themes are listed as thin. Do not present three angry Reddit comments as a trend.
+Thin themes are listed as thin. Do not present three angry Reddit comments as a trend. A
+one-source theme with many reviews (54 App Store complaints) is a real direction, but say it
+comes from one source and check it elsewhere before calling it a trend.
 
 Write `fixes.md` with the Write tool, not with a shell heredoc, `echo` or `printf`. The
 shell treats `$` as a variable inside an unquoted heredoc or double quotes, so "$50 a month"

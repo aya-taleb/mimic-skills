@@ -73,15 +73,31 @@ class StatusTest(unittest.TestCase):
 
     def test_linked_skill_missing_blocks_next(self):
         for f in ("mimic/recon.md", "mimic/features.csv", "mimic/reviews.csv",
-                  "mimic/fixes.md", "founder/validate.md", "mimic/architecture.md",
+                  "mimic/fixes.md", "mimic/architecture.md",
                   "mimic/build-log.md", "mimic/backend.md", "mimic/test/plan.md"):
             touch(self.proj, f)
+        touch(self.proj, "founder/validate.md", "Result: go\n")
         touch(self.proj, "mimic/test/bugs.md",
               "| id | title | severity | status |\n| --- | --- | --- | --- |\n")
         r = self.run_status()
         self.assertEqual(r["next"], "replica-diff")
         self.assertIn("get_linked.py", r["next_blocked"])
         self.assertIn("get_linked.py", status.render(r))
+
+    def test_validate_plan_without_result_is_not_done(self):
+        for f in ("mimic/recon.md", "mimic/features.csv", "mimic/reviews.csv", "mimic/fixes.md",
+                  "mimic/architecture.md"):
+            touch(self.proj, f)
+        touch(self.proj, "founder/validate.md", "# Validate\n\nTest: deposit page. Pass line: 20 to 30.\n")
+        r = self.run_status()
+        v = next(s for s in r["steps"] if s["id"] == "validate")
+        self.assertEqual(v["state"], "partial")
+        self.assertEqual(r["next"], "validate")
+        self.assertIn("numbers", r["next_reason"])
+        touch(self.proj, "founder/validate.md", "# Validate\n\nResult: go, 27 deposits.\n")
+        r = self.run_status()
+        self.assertEqual(next(s for s in r["steps"] if s["id"] == "validate")["state"], "done")
+        self.assertNotEqual(r["next"], "validate")
 
     def test_linked_skill_found_in_home(self):
         touch(self.home, ".claude/skills/replica-diff/SKILL.md", "---\nname: replica-diff\n---\n")
@@ -99,8 +115,9 @@ class StatusTest(unittest.TestCase):
     def chain_to_architect(self, recon_text):
         touch(self.proj, "mimic/recon.md", recon_text)
         for f in ("mimic/features.csv", "mimic/reviews.csv", "mimic/fixes.md",
-                  "founder/validate.md", "mimic/architecture.md"):
+                  "mimic/architecture.md"):
             touch(self.proj, f)
+        touch(self.proj, "founder/validate.md", "Result: go\n")
 
     def test_app_needs_design_next(self):
         self.chain_to_architect("# Recon\nType: app or website\n")

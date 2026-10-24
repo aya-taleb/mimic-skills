@@ -115,6 +115,46 @@ class ReviewsTest(unittest.TestCase):
         self.assertEqual(code, 0)
         self.assertTrue(os.path.isfile(out) and os.path.isfile(pain))
 
+    def test_five_star_praise_is_not_a_complaint(self):
+        p = write(self.tmp, "r.csv", HEADER +
+                  "app-store,https://a.com/1,2026-01-01,5,Love it and the price is so expensive-looking but fine,X\n"
+                  "app-store,https://a.com/2,2026-01-01,5,Worth every penny even if expensive,X\n"
+                  "app-store,https://a.com/3,2026-01-01,4,Too expensive for me,X\n"
+                  "app-store,https://a.com/4,2026-01-01,4,Love it but way too expensive,X\n"
+                  "app-store,https://a.com/5,2026-01-01,2,Too expensive,X\n")
+        kept, _, _ = reviews.load_reviews(p)
+        res = reviews.analyse(kept, self.themes, self.req, today=datetime.date(2026, 2, 1))
+        pricing = next(t for t in res["themes"] if t["id"] == "pricing")
+        urls = sorted(q["url"] for q in pricing["quotes"])
+        self.assertEqual(pricing["count"], 2)
+        self.assertEqual(urls, ["https://a.com/4", "https://a.com/5"])
+        self.assertEqual(pricing["praise_matches"], 3)
+        self.assertIn("Praise left out", reviews.render(res))
+
+    def test_curly_apostrophes_match_and_quote_keeps_original(self):
+        text = "Why can’t I export anything"
+        p = write(self.tmp, "r.csv", HEADER + "app-store,https://a.com/1,2026-01-01,1,%s,X\n" % text)
+        kept, _, _ = reviews.load_reviews(p)
+        res = reviews.analyse(kept, self.themes, self.req, today=datetime.date(2026, 2, 1))
+        self.assertTrue(res["themes"], "curly apostrophe text matched no theme")
+        for t in res["themes"]:
+            for q in t["quotes"]:
+                self.assertIn(q["quote"].strip("."), text)
+        self.assertEqual(res["unthemed_negative"], [])
+
+    def test_thin_and_one_source_are_separate(self):
+        rows = "".join("app-store,https://a.com/%d,2026-01-01,1,Way too expensive %d,X\n" % (i, i)
+                       for i in range(10))
+        p = write(self.tmp, "r.csv", HEADER + rows)
+        kept, _, _ = reviews.load_reviews(p)
+        res = reviews.analyse(kept, self.themes, self.req, today=datetime.date(2026, 2, 1))
+        pricing = next(t for t in res["themes"] if t["id"] == "pricing")
+        self.assertFalse(pricing["thin"])
+        self.assertTrue(pricing["one_source"])
+        md = reviews.render(res)
+        self.assertIn("(one source)", md)
+        self.assertNotIn("(thin", md)
+
     def test_cli_missing_url_column(self):
         p = write(self.tmp, "r.csv", "source,text\ng2,bad\n")
         with redirect_stdout(io.StringIO()):
@@ -193,6 +233,41 @@ class CollectTest(unittest.TestCase):
         self.assertEqual(rows[1]["url"], "")
         added, dropped, _ = collect.append(rows, self.out)
         self.assertEqual((added, dropped), (2, 1))
+
+    def test_saved_raw_feed_is_scrubbed_of_names(self):
+        f = self.apple_feed()
+        with redirect_stdout(io.StringIO()):
+            collect.main(["apple-rss", f, "--out", self.out, "--scrub"])
+        with open(f, encoding="utf-8") as fh:
+            raw = fh.read()
+        self.assertNotIn("secretname", raw)
+        self.assertNotIn("https://x/u/1", raw)
+        self.assertIn("Too many ads", raw)
+        self.assertIn("2026-10-01", raw)
+
+    def test_input_file_left_alone_without_scrub_flag(self):
+        f = self.apple_feed()
+        with redirect_stdout(io.StringIO()):
+            collect.main(["apple-rss", f, "--out", self.out])
+        with open(f, encoding="utf-8") as fh:
+            self.assertIn("secretname", fh.read())
+
+    def test_scrub_command_csv_and_hn_json(self):
+        c = write(self.tmp, "export.csv", "Review,Stars,Link,Reviewer,date\n"
+                  "Slow app,1,https://g2.com/1,Bob Smith,2026-01-01\n")
+        h = write(self.tmp, "hn.json", json.dumps({"hits": [{"objectID": "1", "author": "pg_fan",
+                                                             "comment_text": "Too pricey"}]}))
+        with redirect_stdout(io.StringIO()):
+            self.assertEqual(collect.main(["scrub", c, h]), 0)
+        with open(c, encoding="utf-8") as fh:
+            body = fh.read()
+        self.assertNotIn("Bob", body)
+        self.assertIn("Slow app", body)
+        self.assertIn("https://g2.com/1", body)
+        with open(h, encoding="utf-8") as fh:
+            body = fh.read()
+        self.assertNotIn("pg_fan", body)
+        self.assertIn("Too pricey", body)
 
     def test_bad_inputs(self):
         p = write(self.tmp, "x.json", json.dumps({"nope": 1}))

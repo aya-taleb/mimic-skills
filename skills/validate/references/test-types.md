@@ -52,8 +52,9 @@ you set them after, you'll set them to whatever happened.
 - Base the pass line on what the business needs, not on what sounds normal. Work back
   from the goal: "To reach 50 paying teams by June from a 3% trial-to-paid rate, I need
   this page to turn at least X% of visitors into trials."
-- If you don't have the founder's numbers, label the line as a starting assumption and
-  say why you picked it.
+- If you don't have the founder's numbers, offer a range for their kind of business (see
+  SKILL.md step 3) and let the founder pick inside it before the test starts. Don't set a
+  fixed number for them.
 - Set a minimum sample. A 10% signup rate from 20 visitors is two people.
 - Set an end date. Tests that never end never fail.
 - Between the fail line and the pass line is "unclear". That's a real result: change one

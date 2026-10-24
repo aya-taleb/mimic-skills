@@ -11,7 +11,9 @@ The plan file (founder/validate-plan.json) holds 1 to 3 tests:
       "type": "pre-order",                  fake-door | waitlist | pre-order | concierge | other
       "metric": "pre-orders",               what you count
       "denominator": "unique visitors",     what you divide by (optional, for a rate)
-      "pass_at": 0.05,                      at or above this is a pass
+      "pass_range": [0.03, 0.08],           optional: the range offered when there was no goal
+      "fail_range": [0.01, 0.03],           optional: same, for the fail line
+      "pass_at": 0.05,                      at or above this is a pass (the founder's pick)
       "fail_below": 0.02,                   below this is a fail; between is "unclear"
       "min_sample": 200,                    don't call it before this many in the denominator
       "ends": "2026-11-15",
@@ -19,6 +21,11 @@ The plan file (founder/validate-plan.json) holds 1 to 3 tests:
     }
   ]
 }
+
+No goal in the business file? Write pass_range and fail_range, leave pass_at and
+fail_below as null, and have the founder pick a number inside each range before the
+test starts. `lock` refuses a plan until both lines are picked, and checks that each
+pick sits inside its range.
 
 Usage:
   python3 testplan.py lock founder/validate-plan.json
@@ -69,8 +76,27 @@ def check_plan(plan):
         if not t.get("metric"):
             problems.append("%s: say what you count ('metric')" % label)
         pa, fb = t.get("pass_at"), t.get("fail_below")
+        ranges_ok = True
+        for key, rkey in (("pass_at", "pass_range"), ("fail_below", "fail_range")):
+            rng = t.get(rkey)
+            if rng is None:
+                continue
+            if (not isinstance(rng, list) or len(rng) != 2
+                    or not all(isinstance(x, (int, float)) for x in rng) or rng[0] > rng[1]):
+                problems.append("%s: '%s' should be [low, high]" % (label, rkey))
+                ranges_ok = False
+                continue
+            v = t.get(key)
+            if v is None:
+                problems.append("%s: the founder picks '%s' from %s to %s before the test runs"
+                                % (label, key, _num(rng[0]), _num(rng[1])))
+                ranges_ok = False
+            elif isinstance(v, (int, float)) and not rng[0] <= v <= rng[1]:
+                problems.append("%s: '%s' (%s) is outside the range offered, %s to %s"
+                                % (label, key, _num(v), _num(rng[0]), _num(rng[1])))
         if not isinstance(pa, (int, float)) or not isinstance(fb, (int, float)):
-            problems.append("%s: set both 'pass_at' and 'fail_below' as numbers before the test runs" % label)
+            if ranges_ok or not (t.get("pass_range") or t.get("fail_range")):
+                problems.append("%s: set both 'pass_at' and 'fail_below' as numbers before the test runs" % label)
         elif fb > pa:
             problems.append("%s: fail_below (%s) is higher than pass_at (%s)" % (label, fb, pa))
         if t.get("denominator") and isinstance(pa, (int, float)) and pa > 1:
@@ -85,6 +111,10 @@ def check_plan(plan):
             except ValueError:
                 problems.append("%s: 'ends' should be YYYY-MM-DD" % label)
     return problems
+
+
+def _num(x):
+    return ("%g" % x) if isinstance(x, (int, float)) else str(x)
 
 
 def lock(plan, today=None):

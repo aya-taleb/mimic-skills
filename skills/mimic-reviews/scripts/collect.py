@@ -10,6 +10,7 @@ repeatable.
     python3 collect.py hn-algolia saved/hn.json --competitor "Acme"
     python3 collect.py csv        export.csv --map "text=Review,rating=Stars,url=Link,date=Date"
     python3 collect.py paste      notes.txt --source g2 --competitor "Acme"
+    python3 collect.py scrub      mimic/raw/*.json mimic/raw/*.csv
 
 Every command appends to --out (default mimic/reviews.csv) and skips rows that
 are already there. Columns written: source,url,date,rating,text,competitor,ref.
@@ -21,6 +22,11 @@ What it keeps and drops:
     and counted. Nothing is guessed.
   - Reviewer names, emails, avatars and profile links are never written, even
     when the feed has them. The research is about what people said, not who.
+  - Raw files you save yourself should not keep names either. `scrub` rewrites a
+    saved JSON or CSV in place: it keeps url, date, rating and text and drops
+    reviewer names, handles and profile links. apple-rss and hn-algolia do the
+    same to the file they read when given --scrub. Never scrub a file the user
+    gave you without asking: it is theirs.
   - Text is kept exactly, except that invisible characters (zero-width, bidi
     controls) and HTML tags from HN comments are removed.
 
@@ -57,8 +63,51 @@ TAG = re.compile(r"<[^>]+>")
 URL = re.compile(r"^https?://\S+$")
 
 
+# Keys and columns that hold who wrote a review. Dropped from saved raw files.
+PERSONAL_KEYS = {"author", "authors", "reviewer", "reviewer_name", "reviewername", "user",
+                 "username", "user_name", "handle", "profile", "profile_url", "profileurl",
+                 "avatar", "avatar_url", "email", "name", "nickname", "_highlightresult"}
+
+
 class CollectError(Exception):
     pass
+
+
+def _scrub_node(node):
+    if isinstance(node, dict):
+        return {k: _scrub_node(v) for k, v in node.items() if k.lower() not in PERSONAL_KEYS}
+    if isinstance(node, list):
+        return [_scrub_node(v) for v in node]
+    return node
+
+
+def scrub_file(path):
+    """Rewrite a saved JSON or CSV without reviewer names. Return what was removed."""
+    low = path.lower()
+    if low.endswith(".json"):
+        with open(path, encoding="utf-8") as fh:
+            data = json.load(fh)
+        clean_data = _scrub_node(data)
+        if clean_data == data:
+            return "nothing to remove"
+        with open(path, "w", encoding="utf-8") as fh:
+            json.dump(clean_data, fh, ensure_ascii=False, indent=1)
+        return "author fields removed"
+    if low.endswith(".csv"):
+        with open(path, newline="", encoding="utf-8-sig") as fh:
+            reader = csv.DictReader(fh)
+            fields = reader.fieldnames or []
+            keep = [f for f in fields if (f or "").strip().lower() not in PERSONAL_KEYS]
+            rows = list(reader)
+        if keep == fields:
+            return "nothing to remove"
+        with open(path, "w", newline="", encoding="utf-8") as fh:
+            w = csv.DictWriter(fh, fieldnames=keep, extrasaction="ignore")
+            w.writeheader()
+            for r in rows:
+                w.writerow({k: r.get(k, "") for k in keep})
+        return "columns removed: %s" % ", ".join(f for f in fields if f not in keep)
+    return "skipped: only .json and .csv can be scrubbed; check this file by hand"
 
 
 def clean(text):
@@ -248,14 +297,24 @@ def append(rows, out_path, competitor=""):
 
 def main(argv=None):
     ap = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
-    ap.add_argument("kind", choices=("apple-rss", "hn-algolia", "csv", "paste"))
+    ap.add_argument("kind", choices=("apple-rss", "hn-algolia", "csv", "paste", "scrub"))
     ap.add_argument("files", nargs="+")
     ap.add_argument("--out", default=os.path.join("mimic", "reviews.csv"))
     ap.add_argument("--competitor", default="", help="which competitor these are about")
     ap.add_argument("--source", default="", help="source name for csv and paste rows")
     ap.add_argument("--country", default="us", help="apple-rss: the store country")
     ap.add_argument("--map", default="", help="csv: ours=theirs column names")
+    ap.add_argument("--scrub", action="store_true",
+                    help="apple-rss, hn-algolia: also strip reviewer names from the saved file")
     args = ap.parse_args(argv)
+    if args.kind == "scrub":
+        try:
+            for f in args.files:
+                print("%s: %s" % (f, scrub_file(f)))
+        except (OSError, ValueError, csv.Error) as exc:
+            print("collect: %s" % exc, file=sys.stderr)
+            return 2
+        return 0
     total = [0, 0, 0]
     try:
         mapping = parse_map(args.map)
@@ -268,6 +327,8 @@ def main(argv=None):
                 rows = from_csv(f, mapping, args.source)
             else:
                 rows = from_paste(f, args.source)
+            if args.kind in ("apple-rss", "hn-algolia") and args.scrub:
+                print("%s: %s" % (f, scrub_file(f)))
             a, d, u = append(rows, args.out, args.competitor)
             total = [total[0] + a, total[1] + d, total[2] + u]
             print("%s: %d added, %d dropped (no link or no text), %d already there"

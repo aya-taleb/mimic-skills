@@ -37,8 +37,19 @@ you supplied, with that row's link.
 
 How a theme is ranked: every review that matches it adds a weight. A 1 star
 review adds 1.0, a 5 star review adds 0.2, an unrated one adds 0.6. Reviews
-older than --months (default 18) count half. Themes with fewer than 3 reviews,
-or all from one source, are marked thin.
+older than --months (default 18) count half.
+
+What counts toward a complaint theme: rows rated 3 stars or less, unrated rows,
+and 4 star rows with a "but" (but, however, wish, except, only problem...). A
+5 star row, or a 4 star row with no "but", is praise: it is counted apart as
+praise_matches and never adds to a complaint. Request themes count every row.
+
+Labels: a theme with fewer than 3 reviews is "thin" (few reviews). A theme whose
+reviews all come from one source is "one source", a separate flag: 54 App Store
+reviews are not thin, but they are one source.
+
+Curly quotes and apostrophes (common in iPhone text) are matched as straight
+ones, so "doesn\u2019t" matches a doesn'?t pattern. Quotes keep the original text.
 """
 
 import argparse
@@ -54,6 +65,12 @@ DEFAULT_THEMES = os.path.join(HERE, "themes.json")
 SENTENCE = re.compile(r"(?<=[.!?])\s+|\n+")
 # Zero-width and direction characters hide text from people but not from models.
 INVISIBLE = re.compile("[\u200b-\u200f\u202a-\u202e\u2060-\u2064\ufeff\u00ad]")
+# Curly to straight, one character for one, so positions in the text stay the same.
+QUOTES = str.maketrans({"\u2018": "'", "\u2019": "'", "\u201a": "'", "\u201b": "'",
+                        "\u2032": "'", "\u201c": '"', "\u201d": '"', "\u201e": '"'})
+# "Love it, but..." markers. A 4 star review with one of these is a complaint too.
+CONTRAST = re.compile(r"\b(but|however|though|although|except|wish|if only|only (problem|issue|thing)"
+                      r"|downside|con:|cons:|dislike)\b", re.I)
 INSTRUCTION_LIKE = re.compile(
     r"(ignore (all |any )?(the |your )?(previous|prior|above) (instructions|rules)"
     r"|disregard (the|your|all) (instructions|rules)"
@@ -161,13 +178,28 @@ def weight(review, today, months):
     return w
 
 
+def norm(text):
+    """Text for matching: curly quotes made straight, same length as the input."""
+    return (text or "").translate(QUOTES)
+
+
+def counts_as_complaint(review):
+    """Low ratings, unrated rows, and 4 star rows with a 'but'. Never 5 stars."""
+    r = review["rating"]
+    if r is None or r <= 3:
+        return True
+    if r < 5 and CONTRAST.search(norm(review["text"])):
+        return True
+    return False
+
+
 def snippet(text, pattern, limit=220):
-    """The first sentence of text that matches pattern, verbatim."""
+    """The first sentence of text that matches pattern, verbatim (curly quotes kept)."""
     for sent in SENTENCE.split(text):
-        if pattern.search(sent):
+        if pattern.search(norm(sent)):
             s = sent.strip()
             if len(s) > limit:
-                m = pattern.search(s)
+                m = pattern.search(norm(s))
                 start = max(0, m.start() - limit // 2)
                 s = s[start:start + limit].strip()
                 s = ("..." if start > 0 else "") + s + "..."
@@ -180,22 +212,27 @@ def analyse(reviews, themes, request_patterns, today=None, months=18):
     if today is None:
         today = _dt.date.today()
     results = {t["id"]: {"id": t["id"], "label": t["label"], "kind": t["kind"],
-                         "reviews": [], "score": 0.0} for t in themes}
+                         "reviews": [], "score": 0.0, "praise": 0} for t in themes}
     requests = []
     unthemed_negative = []
     flagged = [r for r in reviews if r.get("instruction_like")]
     for rv in reviews:
         w = weight(rv, today, months)
         matched = False
+        text = norm(rv["text"])
+        complaint_ok = counts_as_complaint(rv)
         for t in themes:
-            hit = next((p for p in t["patterns"] if p.search(rv["text"])), None)
+            hit = next((p for p in t["patterns"] if p.search(text)), None)
             if hit is None:
                 continue
             matched = True
             res = results[t["id"]]
+            if t["kind"] == "complaint" and not complaint_ok:
+                res["praise"] += 1
+                continue
             res["score"] += w
             res["reviews"].append({"rv": rv, "quote": snippet(rv["text"], hit)})
-        req = next((p for p in request_patterns if p.search(rv["text"])), None)
+        req = next((p for p in request_patterns if p.search(text)), None)
         if req is not None and not rv.get("instruction_like"):
             requests.append({"quote": snippet(rv["text"], req), "url": rv["url"],
                              "source": rv["source"], "rating": rv["rating"],
@@ -224,7 +261,9 @@ def analyse(reviews, themes, request_patterns, today=None, months=18):
             "avg_rating": round(sum(rated) / len(rated), 2) if rated else None,
             "sources": sources,
             "competitors": competitors,
-            "thin": len(items) < 3 or len(sources) < 2,
+            "thin": len(items) < 3,
+            "one_source": len(sources) < 2,
+            "praise_matches": res["praise"],
             "quotes": [{"quote": x["quote"], "url": x["rv"]["url"],
                         "source": x["rv"]["source"], "rating": x["rv"]["rating"],
                         "competitor": x["rv"].get("competitor", ""),
@@ -286,10 +325,20 @@ def render(result, dropped=0, dupes=0):
         out.append("| rank | theme | score | reviews | share | avg stars | sources | competitors |")
         out.append("| --- | --- | --- | --- | --- | --- | --- | --- |")
         for i, t in enumerate(rows, 1):
+            flags = [f for f, on in (("thin", t["thin"]), ("one source", t.get("one_source"))) if on]
             out.append("| %d | %s%s | %.1f | %d | %.0f%% | %s | %d | %s |" % (
-                i, t["label"], " (thin)" if t["thin"] else "", t["score"], t["count"],
+                i, t["label"], (" (%s)" % ", ".join(flags)) if flags else "", t["score"], t["count"],
                 t["share_pct"], "-" if t["avg_rating"] is None else "%.1f" % t["avg_rating"],
                 len(t["sources"]), ", ".join(t.get("competitors", [])) or "-"))
+        if kind == "complaint":
+            out.append("")
+            out.append("Counted: rows rated 3 stars or less, unrated rows, and 4 star rows "
+                       "with a \"but\". thin = under 3 reviews. one source = all from one "
+                       "source: a direction, not a trend.")
+            praised = [t for t in rows if t.get("praise_matches")]
+            if praised:
+                out.append("Praise left out (5 stars, or 4 with no \"but\"): %s." % ", ".join(
+                    "%s %d" % (t["label"], t["praise_matches"]) for t in praised))
         for t in rows[:6]:
             out.append("")
             out.append("**%s**" % t["label"])
@@ -328,7 +377,7 @@ def render(result, dropped=0, dupes=0):
 
 
 PAIN_COLUMNS = ["rank", "theme", "kind", "label", "reviews", "share_pct", "avg_rating",
-                "sources", "competitors", "thin", "quote", "quote_url", "quote_ref"]
+                "sources", "competitors", "thin", "quote", "quote_url", "quote_ref", "one_source"]
 
 
 def write_pain_points(result, path):
@@ -341,7 +390,8 @@ def write_pain_points(result, path):
             w.writerow([i, t["id"], t["kind"], t["label"], t["count"], t["share_pct"],
                         "" if t["avg_rating"] is None else t["avg_rating"],
                         ";".join(t["sources"]), ";".join(t.get("competitors", [])),
-                        "yes" if t["thin"] else "no", q["quote"], q["url"], q.get("ref", "")])
+                        "yes" if t["thin"] else "no", q["quote"], q["url"], q.get("ref", ""),
+                        "yes" if t.get("one_source") else "no"])
 
 
 def main(argv=None):

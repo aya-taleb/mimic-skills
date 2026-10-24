@@ -4,7 +4,7 @@
     {
       "name": "mimic-run",
       "status": "ours",
-      "version": "0.1.0"
+      "version": "0.1.1"
     },
     {
       "name": "mimic-recon",
@@ -20,7 +20,7 @@
     {
       "name": "mimic-reviews",
       "status": "reworked",
-      "version": "0.1.0",
+      "version": "0.1.1",
       "source": {
         "repo": "Jakeschincariol/replica-skill",
         "commit": "77c9436fb3d18c3d58169efb8caf4fe906b0dc51",
@@ -78,7 +78,7 @@
     {
       "name": "mimic-deploy",
       "status": "rewritten",
-      "version": "0.1.0",
+      "version": "0.1.1",
       "replaces": {
         "repo": "Jakeschincariol/replica-skill",
         "path": "replica-deploy"
@@ -118,7 +118,7 @@
       "name": "validate",
       "status": "synced",
       "home": "entrepreneur-skills",
-      "version": "0.1.0"
+      "version": "0.1.1"
     },
     {
       "name": "competitors",
