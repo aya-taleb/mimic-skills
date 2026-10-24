@@ -5,7 +5,7 @@ Built 2026-10-23, unattended. What is done, what is not, and what Aya should loo
 ## Not finished
 
 - **Synced skills are not in the repo yet.** market-research, validate (entrepreneur-skills),
-  competitors (biz-launch-skills) and launch-video (multimedia-skills) are listed in
+  competitors (biz-ready-skills) and launch-video (multimedia-skills) are listed in
   `skills.json` and arrive with the sync step. Until then `/validate` and the other three do
   not exist in a mimic-only install, and mimic-run says so.
 - **Linked skills were never run.** replica-design, replica-diff and replica-brand got a

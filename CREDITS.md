@@ -49,7 +49,7 @@ SOFTWARE.
 
 ## Synced skills
 
-market-research and validate (entrepreneur-skills), competitors (biz-launch-skills) and launch-video (multimedia-skills) are Aya Taleb's own skills, copied in from their home repos. Their credits live in those repos.
+market-research and validate (entrepreneur-skills), competitors (biz-ready-skills) and launch-video (multimedia-skills) are Aya Taleb's own skills, copied in from their home repos. Their credits live in those repos.
 
 ## This repo
 

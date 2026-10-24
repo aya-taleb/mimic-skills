@@ -11,7 +11,7 @@ Fix it in its home repo, and the change gets copied everywhere else.
 | --- | --- |
 | market-research | [entrepreneur-skills](https://github.com/aya-taleb/entrepreneur-skills) |
 | validate | [entrepreneur-skills](https://github.com/aya-taleb/entrepreneur-skills) |
-| competitors | [biz-launch-skills](https://github.com/aya-taleb/biz-launch-skills) |
+| competitors | [biz-ready-skills](https://github.com/aya-taleb/biz-ready-skills) |
 | launch-video | [multimedia-skills](https://github.com/aya-taleb/multimedia-skills) |
 | replica-design, replica-diff, replica-brand | not copied here. They are Jake Schincariol's: send fixes to [replica-skill](https://github.com/Jakeschincariol/replica-skill) |
 | every mimic-* skill | this repo |

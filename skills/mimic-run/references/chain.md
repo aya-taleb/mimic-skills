@@ -6,7 +6,7 @@ files exist and are not empty.
 | # | stage | skill | writes | comes from |
 | --- | --- | --- | --- | --- |
 | 1 | research | market-research (optional) | founder/market.md | entrepreneur-skills (synced) |
-| 2 | research | competitors (optional) | founder/competitors.md | biz-launch-skills (synced) |
+| 2 | research | competitors (optional) | founder/competitors.md | biz-ready-skills (synced) |
 | 3 | research | mimic-recon | mimic/recon.md, mimic/features.csv | this repo |
 | 4 | reviews | mimic-reviews | mimic/reviews.csv, mimic/feedback.md, mimic/fixes.md, mimic/pain-points.csv | this repo |
 | 5 | validate | validate | founder/validate.md | entrepreneur-skills (synced) |
