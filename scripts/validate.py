@@ -56,6 +56,35 @@ def frontmatter(text):
     return data
 
 
+def frontmatter_problems(text):
+    """Catch frontmatter that real YAML parsers reject, so the skill still loads.
+
+    The Claude app skips a skill whose frontmatter is not valid YAML. Two mistakes
+    slip past a loose reader: a line under a block value (>-) that is not indented,
+    and a one-line value that holds ": " (YAML reads it as a new key).
+    """
+    problems = []
+    end = text.find("\n---", 3)
+    if not text.startswith("---") or end == -1:
+        return problems
+    in_block = False
+    for line in text[3:end].splitlines():
+        if not line.strip():
+            continue
+        if line.startswith((" ", "\t")):
+            continue
+        m = re.match(r"^([A-Za-z_-]+):\s*(.*)$", line)
+        if not m:
+            problems.append("line is not indented under its key: %r" % line[:60])
+            continue
+        val = m.group(2).strip()
+        in_block = val in (">-", ">", "|", "|-")
+        if not in_block and val and val[0] not in "\"'[{" and (": " in val or " #" in val):
+            problems.append("%s: one-line value holds ': ' or ' #'; use '>-' and indent it"
+                            % m.group(1))
+    return problems
+
+
 def banned_hits(line):
     low = line.lower()
     hits = []
@@ -130,6 +159,8 @@ def check_skills(errors):
         if fm is None:
             errors.append("skills/%s/SKILL.md has no frontmatter" % name)
             continue
+        for p in frontmatter_problems(read(skill_md)):
+            errors.append("skills/%s/SKILL.md frontmatter: %s" % (name, p))
         if fm.get("name") != name:
             errors.append("skills/%s: frontmatter name is %r" % (name, fm.get("name")))
         desc = fm.get("description", "")
