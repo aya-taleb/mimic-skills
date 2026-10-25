@@ -168,6 +168,8 @@ def check_skills(errors):
             errors.append("skills/%s: description is empty" % name)
         elif len(desc) > 1024:
             errors.append("skills/%s: description is %d characters (max 1024)" % (name, len(desc)))
+        if "<" in desc or ">" in desc:
+            errors.append("skills/%s: description has < or >; the Claude app rejects angle brackets" % name)
         status = listed.get(name, {}).get("status", "")
         if status in ("synced", "linked"):
             continue
